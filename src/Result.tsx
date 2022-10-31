@@ -20,6 +20,14 @@ const Items: FC<{ seed: string, items: Array<string> }> = ({ seed, items }) => {
           const size = random(base + "size") * 30 + 20;
           const offset = ((random(seed + i.toString() + "y") * height) + (frame * size * 0.25) * 0.25) % height;
           const opacity = interpolate(offset, [0, height / 4, height / 2, height / 4 * 3, height], [0, 0.1, 0.5, 0.1, 0]);
+          const style = css`
+              position: absolute;
+              fontSize: ${size}px;
+              opacity: ${opacity};
+              transform: rotate(${random(base + "rotate") * 20 - 10}deg);
+              left: ${random(base + "x") * width}px;
+              top: ${offset}px;
+          `;
 
           return (
             <div key={i}
