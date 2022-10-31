@@ -14,7 +14,7 @@ export const Results: FC<ResultsProps> = ({ results }: ResultsProps) => {
   return (
     <>
       <AbsoluteFill style={{ background: "#222222" }}>
-        <Sequence from={230}>
+        <Sequence>
           <Series>
             {
               sorted.map((score, i) => (
@@ -26,7 +26,7 @@ export const Results: FC<ResultsProps> = ({ results }: ResultsProps) => {
           </Series>
         </Sequence>
       </AbsoluteFill>
-      <Audio src={music} />
+      <Audio src={music} startFrom={100} />
     </>
   )
 };

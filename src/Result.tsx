@@ -10,17 +10,16 @@ export interface ResultProps {
 
 const Items: FC<{ seed: string, items: Array<string> }> = ({ seed, items }) => {
   const { width, height } = useVideoConfig();
-  const frame = useCurrentFrame();
 
   return (
     <AbsoluteFill style={{ opacity: 0.25 }}>
       {
         items.map((emoji, i) => {
           const base = `${seed}${i}`;
-          const size = random(base + "size") * 30 + 20;
+          const size = (random(base + "size") * 30 + 20) * Math.max(1, 4 - Math.log10(items.length));
 
-          const left = (random(seed + i.toString() + "y") * width * 1.2) - width * 0.2 + ((frame / 150) * width * 0.2) * (size / 50);
-          const top = (random(base + "x") * height);
+          const left = (random(base + "-y") * 6 * (width / 8)) + width / 8;
+          const top = (random(base + "-x") * 6 * (height / 8)) + height / 8;
 
           const style: CSSProperties = {
             left: left + "px",
@@ -75,7 +74,7 @@ const User: FC<{ score: Score, place: number }> = ({ score, place }) => {
   return (
     <AbsoluteFill style={{ display: "flex", flexFlow: "column nowrap", justifyContent: "center", alignItems: "center" }}>
       <Place>#{place}</Place>
-      <Points>{Math.floor(points)} points</Points>
+      <Points>{Math.floor(points)} point{Math.floor(points) === 1 ? "" : "s"}</Points>
 
       <Member>
         <Img src={score.avatar} style={{ width: 150, height: 150, borderRadius: "50%" }}></Img>
