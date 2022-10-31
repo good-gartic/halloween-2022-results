@@ -18,8 +18,8 @@ const Items: FC<{ seed: string, items: Array<string> }> = ({ seed, items }) => {
           const base = `${seed}${i}`;
           const size = (random(base + "size") * 30 + 20) * Math.max(1, 4 - Math.log10(items.length));
 
-          const left = (random(base + "-y") * 6 * (width / 8)) + width / 8;
-          const top = (random(base + "-x") * 6 * (height / 8)) + height / 8;
+          const left = (random(base + "~y") * (width - size));
+          const top = (random(base + "~x") * (height - size));
 
           const style: CSSProperties = {
             left: left + "px",
@@ -86,7 +86,7 @@ const User: FC<{ score: Score, place: number }> = ({ score, place }) => {
 
 export const Result: FC<ResultProps> = ({ place, score }: ResultProps) => {
   const frame = useCurrentFrame();
-  const opacity = interpolate(frame, [0, 10, 90, 100, 150], [0, 1, 1, 1, 0]);
+  const opacity = interpolate(frame, [0, 10, 90, 100, 120], [0, 1, 1, 1, 0]);
 
   return (
     <AbsoluteFill style={{ opacity: opacity }}>

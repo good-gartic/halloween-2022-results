@@ -18,7 +18,7 @@ export const Results: FC<ResultsProps> = ({ results }: ResultsProps) => {
           <Series>
             {
               sorted.map((score, i) => (
-                <Series.Sequence key={i} durationInFrames={150}>
+                <Series.Sequence key={i} durationInFrames={120}>
                   <Result score={score} place={sorted.length - i} />
                 </Series.Sequence>
               ))
