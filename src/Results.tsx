@@ -2,7 +2,7 @@ import { FC } from "react";
 import { AbsoluteFill, Audio, Sequence, Series } from "remotion";
 import { Result } from "./Result";
 import { Score } from "./types";
-import music from "./assets/music.mp3";
+import music from "./assets/music-christmas.mp3";
 
 export interface ResultsProps {
   results: Array<Score>

@@ -12,7 +12,7 @@ const Items: FC<{ seed: string, items: Array<string> }> = ({ seed, items }) => {
   const { width, height } = useVideoConfig();
 
   return (
-    <AbsoluteFill style={{ opacity: 0.25 }}>
+    <AbsoluteFill style={{ opacity: 0.25, backgroundColor: "#1e3a8a" }}>
       {
         items.map((emoji, i) => {
           const base = `${seed}${i}`;
@@ -30,7 +30,11 @@ const Items: FC<{ seed: string, items: Array<string> }> = ({ seed, items }) => {
             zIndex: Math.floor(size),
           };
 
-          return <div key={i} style={style}>{emoji}</div>;
+          const image = (emoji.startsWith("%"))
+            ? <Img width={64} height={64} src={`https://i.imgur.com/${emoji.replace(/%/g, "")}.png`}/>
+            : <span>{emoji}</span>
+
+          return <div key={i} style={style}>{image}</div>;
         })
       }
     </AbsoluteFill>
@@ -41,7 +45,7 @@ const Place = styled.div`
   font-family: 'JetBrains Mono';
   font-size: 60px;
   font-weight: bold;
-  color: #ffaa00;
+  color: #0099ff;
 `;
 
 const Points = styled.div`
@@ -77,7 +81,7 @@ const User: FC<{ score: Score, place: number }> = ({ score, place }) => {
       <Points>{Math.floor(points)} point{Math.floor(points) === 1 ? "" : "s"}</Points>
 
       <Member>
-        <Img src={score.avatar} style={{ width: 150, height: 150, borderRadius: "50%" }}></Img>
+        <Img src={score.avatar} style={{ width: 150, height: 150, borderRadius: "50%" }} />
         <Username>{score.username}</Username>
       </Member>
     </AbsoluteFill>
@@ -89,7 +93,7 @@ export const Result: FC<ResultProps> = ({ place, score }: ResultProps) => {
   const opacity = interpolate(frame, [0, 10, 90, 100, 120], [0, 1, 1, 1, 0]);
 
   return (
-    <AbsoluteFill style={{ opacity: opacity }}>
+    <AbsoluteFill style={{ opacity }}>
       <Items seed={place.toString()} items={score.items} />
       <User score={score} place={place} />
     </AbsoluteFill>
